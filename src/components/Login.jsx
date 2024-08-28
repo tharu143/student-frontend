@@ -1,67 +1,70 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("admin");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('admin'); 
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password, userType }
-      );
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // Store user details
-      window.location.href = "/dashboard";
+      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password, role });
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+
+        if (role === 'admin') {
+          window.location.href = '/dashboard'; 
+        } else if (role === 'staff') {
+          window.location.href = '/StudentProfile'; 
+        }
+      } else {
+        setError(response.data.message);
+      }
     } catch (err) {
-      setError("Invalid credentials");
+      setError('Login failed. Please check your credentials.');
+      console.error('Login error:', err);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+      <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
             <input
-              type="email"
               id="email"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border rounded"
+              placeholder="Email"
               required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="password">Password</label>
             <input
-              type="password"
               id="password"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border rounded"
+              placeholder="Password"
               required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="userType" className="block text-gray-700">
-              User Type
-            </label>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="role">Role</label>
             <select
-              id="userType"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              className="w-full p-2 border rounded"
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="admin">Admin</option>
               <option value="staff">Staff</option>
@@ -69,11 +72,12 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Login
           </button>
         </form>
+        {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
       </div>
     </div>
   );
