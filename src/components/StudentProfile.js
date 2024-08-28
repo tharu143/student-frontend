@@ -83,7 +83,7 @@ const StudentProfile = () => {
                 onClick={() => setActiveSection('studentAttendance')}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-200"
               >
-                Student Attendance
+                Student Attendance 
               </button>
             </li>
           </ul>
@@ -96,5 +96,5 @@ const StudentProfile = () => {
     </div>
   );
 };
-
+// tharunmanoj
 export default StudentProfile;
