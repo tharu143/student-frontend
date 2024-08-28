@@ -29,15 +29,24 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (activeSection === "overview") {
-      fetchChartData();
+    // Redirect to login if not authenticated
+    if (!localStorage.getItem('token')) {
+      navigate('/login');
+    } else {
+      if (activeSection === "overview") {
+        fetchChartData();
+      }
     }
-  }, [activeSection]);
+  }, [activeSection, navigate]);
 
   const fetchChartData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/chart-data');
+      const response = await axios.get('/api/chart-data', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
       setChartData(response.data);
     } catch (error) {
       console.error('Error fetching chart data:', error);
