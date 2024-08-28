@@ -21,3 +21,6 @@ export const updateCertificate = async (id, certificateData) => {
 export const deleteCertificate = async (id) => {
   return await axios.delete(`${API_URL}/${id}`);
 };
+// export const deleteCertificate = async (id) => {
+//   return await axios.delete(`${API_URL}/${id}`);
+// };
