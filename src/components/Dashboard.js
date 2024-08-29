@@ -9,7 +9,6 @@ import StaffPersonalDetails from "./StaffPersonalDetails";
 import StudentAttendance from "./StudentAttendance";
 import StaffWorksheet from "./StaffWorksheet";
 import StaffTaskSheet from "./StaffTaskSheet";
-import AddCourse from "./AddCourse";
 import Intern from "./Intern";
 import Fees from "./Fees";
 import StudentDetails from "./StudentDetails";
@@ -94,7 +93,6 @@ const Dashboard = () => {
           {activeSection === "staffPersonalDetails" && <StaffPersonalDetails />}
           {activeSection === "staffWorksheet" && <StaffWorksheet />}
           {activeSection === "staffTaskSheet" && <StaffTaskSheet />}
-          {activeSection === "AddCourse" && <AddCourse />}
           {activeSection === "intern" && <Intern />}
           {activeSection === "fees" && <Fees />}
         </main>

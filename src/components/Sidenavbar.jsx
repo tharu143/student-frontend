@@ -15,9 +15,7 @@ const Sidenavbar = ({ setActiveSection }) => {
       setShowStudentDropdown(!showStudentDropdown);
     } else if (dropdown === "staff") {
       setShowStaffDropdown(!showStaffDropdown);
-    } else if (dropdown === "course") {
-      setShowCourseDropdown(!showCourseDropdown);
-    }
+    } 
   };
 
   return (
@@ -133,45 +131,6 @@ const Sidenavbar = ({ setActiveSection }) => {
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Task Sheet
-                </Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li className="mb-2">
-          <button
-            onClick={() => toggleDropdown("course")}
-            className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
-          >
-            Course
-          </button>
-          {showCourseDropdown && (
-            <ul className="pl-4 mt-2">
-               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AddCourse")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  AddCourse
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("ViewCourses")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  View Courses
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AssignCourse")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  Assign Course to Student
                 </Link>
               </li>
             </ul>

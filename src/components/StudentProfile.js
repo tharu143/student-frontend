@@ -4,6 +4,7 @@ import PersonalDetails from './PersonalDetails';
 import CertificateVerification from './CertificateVerification';
 import StudentReportSheet from './StudentReportSheet';
 import StudentAttendance from './StudentAttendance';
+import Fees from './Fees';
 import Footer from './Footer';
 import logo from './assets/logo.png';
 
@@ -22,6 +23,8 @@ const StudentProfile = () => {
         return <StudentReportSheet />;
       case 'studentAttendance':
         return <StudentAttendance />;
+      case 'Fees':
+        return <Fees />;
       default:
         return <StudentDetails />;
     }
@@ -84,6 +87,14 @@ const StudentProfile = () => {
                 className="block w-full text-left px-4 py-2 hover:bg-gray-200"
               >
                 Student Attendance 
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setActiveSection('Fees')}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+              >
+                Fees
               </button>
             </li>
           </ul>
