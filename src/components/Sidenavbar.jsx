@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Sidenavbar = ({ setActiveSection }) => {
   const [showStudentDropdown, setShowStudentDropdown] = useState(false);
   const [showStaffDropdown, setShowStaffDropdown] = useState(false);
-  const [showCourseDropdown, setShowCourseDropdown] = useState(false);
 
   const handleClick = (section) => {
     setActiveSection(section);
