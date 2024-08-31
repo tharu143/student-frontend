@@ -1,39 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import StudentDetails from './StudentDetails';
 import PersonalDetails from './PersonalDetails';
 import CertificateVerification from './CertificateVerification';
-import ProjectSheet from './ProjectSheet';
+import StudentReportSheet from './StudentReportSheet';
 import StudentAttendance from './StudentAttendance';
-import Footer from "./Footer";
+import Fees from './Fees';
+import Footer from './Footer';
 import logo from './assets/logo.png';
 
 const StudentProfile = () => {
-  const [studentData, setStudentData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [activeSection, setActiveSection] = useState('studentDetails'); 
-
-  // useEffect(() => {
-  //   const fetchStudentData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await axios.get('/api/student-profile', {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem('token')}`
-  //         }
-  //       });
-  //       setStudentData(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching student data:', error);
-  //       setError('Error fetching student data');
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchStudentData();
-  // }, []);
+  const [activeSection, setActiveSection] = useState('studentDetails');
 
   const renderSection = () => {
     switch (activeSection) {
@@ -43,10 +19,12 @@ const StudentProfile = () => {
         return <PersonalDetails />;
       case 'certificateVerification':
         return <CertificateVerification />;
-      case 'projectSheet':
-        return <ProjectSheet />;
+      case 'studentReportSheet':
+        return <StudentReportSheet />;
       case 'studentAttendance':
         return <StudentAttendance />;
+      case 'Fees':
+        return <Fees />;
       default:
         return <StudentDetails />;
     }
@@ -97,10 +75,10 @@ const StudentProfile = () => {
             </li>
             <li>
               <button
-                onClick={() => setActiveSection('projectSheet')}
+                onClick={() => setActiveSection('studentReportSheet')}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-200"
               >
-                Project Sheet
+                Student Report Sheet
               </button>
             </li>
             <li>
@@ -108,21 +86,20 @@ const StudentProfile = () => {
                 onClick={() => setActiveSection('studentAttendance')}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-200"
               >
-                Student Attendance
+                Student Attendance 
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setActiveSection('Fees')}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+              >
+                Fees
               </button>
             </li>
           </ul>
         </nav>
         <main className="flex-grow p-4">
-          {loading && <p>Loading student data...</p>}
-          {error && <p className="text-red-500">{error}</p>}
-          {studentData && (
-            <div className="bg-white p-4 rounded shadow">
-              <div><strong>Name:</strong> {studentData.name}</div>
-              <div><strong>Email:</strong> {studentData.email}</div>
-              {/* Add more fields as needed */}
-            </div>
-          )}
           {renderSection()}
         </main>
       </div>
@@ -130,5 +107,5 @@ const StudentProfile = () => {
     </div>
   );
 };
-
+// tharunmanoj
 export default StudentProfile;

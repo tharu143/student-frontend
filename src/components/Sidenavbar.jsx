@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Sidenavbar = ({ setActiveSection }) => {
   const [showStudentDropdown, setShowStudentDropdown] = useState(false);
   const [showStaffDropdown, setShowStaffDropdown] = useState(false);
-  const [showCourseDropdown, setShowCourseDropdown] = useState(false);
+  const [showInternDropdown, setShowInternDropdown] = useState(false);
 
   const handleClick = (section) => {
     setActiveSection(section);
@@ -15,8 +14,8 @@ const Sidenavbar = ({ setActiveSection }) => {
       setShowStudentDropdown(!showStudentDropdown);
     } else if (dropdown === "staff") {
       setShowStaffDropdown(!showStaffDropdown);
-    } else if (dropdown === "course") {
-      setShowCourseDropdown(!showCourseDropdown);
+    } else if (dropdown === "intern") {
+      setShowInternDropdown(!showInternDropdown);
     }
   };
 
@@ -24,13 +23,12 @@ const Sidenavbar = ({ setActiveSection }) => {
     <nav className="bg-gray-800 text-white w-64 p-4">
       <ul>
         <li className="mb-2">
-          <Link
-            to="#"
+          <button
             onClick={() => handleClick("overview")}
-            className="block py-3 px-4 hover:bg-gray-700 rounded"
+            className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
           >
             Dashboard
-          </Link>
+          </button>
         </li>
         <li className="mb-2">
           <button
@@ -41,60 +39,53 @@ const Sidenavbar = ({ setActiveSection }) => {
           </button>
           {showStudentDropdown && (
             <ul className="pl-4 mt-2">
-              {/* Existing student dropdown items */}
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("studentDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("personalDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Personal Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("certificateVerification")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Certificate Verification
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("studentreportsheet")}
+                <button
+                  onClick={() => handleClick("studentReportSheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  StudentReportSheet
-                </Link>
+                  Student Report Sheet
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("studentAttendance")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Attendance
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("fees")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Fees
-                </Link>
+                </button>
               </li>
             </ul>
           )}
@@ -109,82 +100,59 @@ const Sidenavbar = ({ setActiveSection }) => {
           {showStaffDropdown && (
             <ul className="pl-4 mt-2">
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("staffPersonalDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Personal Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("staffWorksheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Worksheet
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("staffTaskSheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Task Sheet
-                </Link>
+                </button>
               </li>
             </ul>
           )}
         </li>
         <li className="mb-2">
           <button
-            onClick={() => toggleDropdown("course")}
+            onClick={() => toggleDropdown("intern")}
             className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
           >
-            Course
+            Intern
           </button>
-          {showCourseDropdown && (
+          {showInternDropdown && (
             <ul className="pl-4 mt-2">
-               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AddCourse")}
+              <li className="mb-2">
+                <button
+                  onClick={() => handleClick("viewInterns")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  AddCourse
-                </Link>
+                  View Interns
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("ViewCourses")}
+                <button
+                  onClick={() => handleClick("internDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  View Courses
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AssignCourse")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  Assign Course to Student
-                </Link>
+                  Intern Details
+                </button>
               </li>
             </ul>
           )}
-        </li>
-        <li className="mb-2">
-          <Link
-            to="#"
-            onClick={() => handleClick("intern")}
-            className="block py-3 px-4 hover:bg-gray-700 rounded"
-          >
-            Intern
-          </Link>
         </li>
       </ul>
     </nav>
