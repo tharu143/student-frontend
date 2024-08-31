@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Sidenavbar = ({ setActiveSection }) => {
   const [showStudentDropdown, setShowStudentDropdown] = useState(false);
   const [showStaffDropdown, setShowStaffDropdown] = useState(false);
+  const [showInternDropdown, setShowInternDropdown] = useState(false);
 
   const handleClick = (section) => {
     setActiveSection(section);
@@ -14,6 +14,8 @@ const Sidenavbar = ({ setActiveSection }) => {
       setShowStudentDropdown(!showStudentDropdown);
     } else if (dropdown === "staff") {
       setShowStaffDropdown(!showStaffDropdown);
+    } else if (dropdown === "intern") {
+      setShowInternDropdown(!showInternDropdown);
     }
   };
 
@@ -21,13 +23,12 @@ const Sidenavbar = ({ setActiveSection }) => {
     <nav className="bg-gray-800 text-white w-64 p-4">
       <ul>
         <li className="mb-2">
-          <Link
-            to="#"
+          <button
             onClick={() => handleClick("overview")}
-            className="block py-3 px-4 hover:bg-gray-700 rounded"
+            className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
           >
             Dashboard
-          </Link>
+          </button>
         </li>
         <li className="mb-2">
           <button
@@ -39,58 +40,52 @@ const Sidenavbar = ({ setActiveSection }) => {
           {showStudentDropdown && (
             <ul className="pl-4 mt-2">
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("studentDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("personalDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Personal Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("certificateVerification")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Certificate Verification
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("studentreportsheet")}
+                <button
+                  onClick={() => handleClick("studentReportSheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Report Sheet
                 </Link>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("studentAttendance")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Attendance
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("fees")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Fees
-                </Link>
+                </button>
               </li>
             </ul>
           )}
@@ -105,13 +100,12 @@ const Sidenavbar = ({ setActiveSection }) => {
           {showStaffDropdown && (
             <ul className="pl-4 mt-2">
               <li className="mb-2">
-                <Link
-                  to="#"
+                <button
                   onClick={() => handleClick("staffPersonalDetails")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Personal Details
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
                 <Link
@@ -120,7 +114,7 @@ const Sidenavbar = ({ setActiveSection }) => {
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Staff Report Sheet
-                </Link>
+                </button>
               </li>
               <li className="mb-2">
                 <Link
@@ -133,15 +127,6 @@ const Sidenavbar = ({ setActiveSection }) => {
               </li>
             </ul>
           )}
-        </li>
-        <li className="mb-2">
-          <Link
-            to="#"
-            onClick={() => handleClick("intern")}
-            className="block py-3 px-4 hover:bg-gray-700 rounded"
-          >
-            Intern
-          </Link>
         </li>
       </ul>
     </nav>

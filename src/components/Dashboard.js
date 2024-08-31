@@ -9,12 +9,14 @@ import StaffPersonalDetails from "./StaffPersonalDetails";
 import StudentAttendance from "./StudentAttendance";
 import StaffReportSheet from "./StaffReportSheet"; // Renamed from StaffTaskSheet
 import Intern from "./Intern";
+import InternDetails from "./InternDetails";
+import ViewInterns from "./ViewInterns"; // Import the new component
 import Fees from "./Fees";
 import StudentDetails from "./StudentDetails";
 import ViewStaff from "./ViewStaff";
 import BarChart from "./BarChart";
-import Footer from "./Footer"; // Import the Footer component
-import logo from './assets/logo.png'; // Adjust the path based on where your image is stored
+import Footer from "./Footer";
+import logo from './assets/logo.png';
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -28,15 +30,23 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (activeSection === "overview") {
-      fetchChartData();
+    if (!localStorage.getItem('token')) {
+      navigate('/login');
+    } else {
+      if (activeSection === "overview") {
+        fetchChartData();
+      }
     }
-  }, [activeSection]);
+  }, [activeSection, navigate]);
 
   const fetchChartData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/chart-data');
+      const response = await axios.get('/api/chart-data', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
       setChartData(response.data);
     } catch (error) {
       console.error('Error fetching chart data:', error);
@@ -56,7 +66,7 @@ const Dashboard = () => {
           <span className="mr-4">Welcome</span>
           <button
             onClick={() => {
-              localStorage.removeItem("user");
+              localStorage.removeItem("token");
               navigate("/login");
             }}
             className="bg-red-500 px-4 py-2 rounded"
@@ -79,11 +89,13 @@ const Dashboard = () => {
           {activeSection === "studentDetails" && <StudentDetails />}
           {activeSection === "personalDetails" && <PersonalDetails />}
           {activeSection === "certificateVerification" && <CertificateVerification />}
-          {activeSection === "studentreportsheet" && <StudentReportSheet />}
+          {activeSection === "studentReportSheet" && <StudentReportSheet />}
           {activeSection === "studentAttendance" && <StudentAttendance />}
           {activeSection === "staffPersonalDetails" && <StaffPersonalDetails />}
           {activeSection === "staffReportSheet" && <StaffReportSheet />} {/* Renamed from StaffTaskSheet */}
           {activeSection === "intern" && <Intern />}
+          {activeSection === "internDetails" && <InternDetails />}
+          {activeSection === "viewInterns" && <ViewInterns />} {/* Add this line */}
           {activeSection === "fees" && <Fees />}
           {activeSection === "viewStaff" && <ViewStaff />}
         </main>
