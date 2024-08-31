@@ -10,11 +10,13 @@ import StudentAttendance from "./StudentAttendance";
 import StaffWorksheet from "./StaffWorksheet";
 import StaffTaskSheet from "./StaffTaskSheet";
 import Intern from "./Intern";
+import InternDetails from "./InternDetails";
+import ViewInterns from "./ViewInterns"; // Import the new component
 import Fees from "./Fees";
 import StudentDetails from "./StudentDetails";
 import BarChart from "./BarChart";
-import Footer from "./Footer"; // Import the Footer component
-import logo from './assets/logo.png'; // Adjust the path based on where your image is stored
+import Footer from "./Footer";
+import logo from './assets/logo.png';
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -28,7 +30,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Redirect to login if not authenticated
     if (!localStorage.getItem('token')) {
       navigate('/login');
     } else {
@@ -65,7 +66,7 @@ const Dashboard = () => {
           <span className="mr-4">Welcome</span>
           <button
             onClick={() => {
-              localStorage.removeItem("user");
+              localStorage.removeItem("token");
               navigate("/login");
             }}
             className="bg-red-500 px-4 py-2 rounded"
@@ -88,16 +89,18 @@ const Dashboard = () => {
           {activeSection === "studentDetails" && <StudentDetails />}
           {activeSection === "personalDetails" && <PersonalDetails />}
           {activeSection === "certificateVerification" && <CertificateVerification />}
-          {activeSection === "studentreportsheet" && <StudentReportSheet />}
+          {activeSection === "studentReportSheet" && <StudentReportSheet />}
           {activeSection === "studentAttendance" && <StudentAttendance />}
           {activeSection === "staffPersonalDetails" && <StaffPersonalDetails />}
           {activeSection === "staffWorksheet" && <StaffWorksheet />}
           {activeSection === "staffTaskSheet" && <StaffTaskSheet />}
           {activeSection === "intern" && <Intern />}
+          {activeSection === "internDetails" && <InternDetails />}
+          {activeSection === "viewInterns" && <ViewInterns />} {/* Add this line */}
           {activeSection === "fees" && <Fees />}
         </main>
       </div>
-      <Footer /> {/* Add the Footer component */}
+      <Footer />
     </div>
   );
 };
