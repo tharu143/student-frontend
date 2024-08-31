@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { createStaff } from '../api/staffApi'; // Import the API function
+import { createStaff } from '../api/staffApi';
 
 const StaffPersonalDetails = () => {
-  const [formData, setFormData] = useState({
+  const [staff, setStaff] = useState({
     name: '',
     role: '',
     dateOfJoining: '',
@@ -16,154 +16,171 @@ const StaffPersonalDetails = () => {
   });
 
   const handleChange = (e) => {
-    const { name, type, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'file' ? files[0] : e.target.value,
+    const { name, value, files } = e.target;
+    setStaff({
+      ...staff,
+      [name]: files ? files[0] : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Create FormData object to handle file uploads and form data
-    const form = new FormData();
-    for (const key in formData) {
-      if (formData[key]) {
-        form.append(key, formData[key]);
-      }
-    }
-
     try {
-      const result = await createStaff(form); // Use the createStaff API function
-      alert('Staff details submitted successfully!');
+      await createStaff(staff);
+      alert('Staff created successfully');
+      setStaff({
+        name: '',
+        role: '',
+        dateOfJoining: '',
+        bankAccountNumber: '',
+        branch: '',
+        ifscCode: '',
+        offerLetter: null,
+        aadharXerox: null,
+        passportPhoto: null,
+        passbook: null,
+      });
     } catch (error) {
-      console.error('Error:', error.response ? error.response.data : error.message);
-      alert('Submission failed.');
+      console.error('Error submitting staff details:', error);
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Staff Personal Details</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="mb-4">
-          <label className="block text-gray-700">Name</label>
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label className="block mb-2">
+          Name:
           <input
+            type="text"
             name="name"
-            type="text"
-            value={formData.name}
+            value={staff.name}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Role</label>
+        </label>
+
+        <label className="block mb-2">
+          Role:
           <input
+            type="text"
             name="role"
-            type="text"
-            value={formData.role}
+            value={staff.role}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Date of Joining</label>
+        </label>
+
+        <label className="block mb-2">
+          Date of Joining:
           <input
-            name="dateOfJoining"
             type="date"
-            value={formData.dateOfJoining}
+            name="dateOfJoining"
+            value={staff.dateOfJoining}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Bank Account Number</label>
+        </label>
+
+        <label className="block mb-2">
+          Bank Account Number:
           <input
+            type="text"
             name="bankAccountNumber"
-            type="text"
-            value={formData.bankAccountNumber}
+            value={staff.bankAccountNumber}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Branch</label>
+        </label>
+
+        <label className="block mb-2">
+          Branch:
           <input
+            type="text"
             name="branch"
-            type="text"
-            value={formData.branch}
+            value={staff.branch}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">IFSC Code</label>
+        </label>
+
+        <label className="block mb-2">
+          IFSC Code:
           <input
+            type="text"
             name="ifscCode"
-            type="text"
-            value={formData.ifscCode}
+            value={staff.ifscCode}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            required
+            className="border p-2 rounded w-full"
           />
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700">Offer Letter</label>
+        </label>
+
+        {/* File inputs with file name display */}
+        <label className="block mb-2">
+          Offer Letter:
           <input
+            type="file"
             name="offerLetter"
-            type="file"
-            accept=".pdf,.png,.jpg"
             onChange={handleChange}
-            className="mt-1 block w-full"
+            accept="application/pdf,image/*"
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Aadhar Xerox</label>
+          <span className="text-sm text-gray-600">
+            {staff.offerLetter ? staff.offerLetter.name : 'No file selected'}
+          </span>
+        </label>
+
+        <label className="block mb-2">
+          Aadhar Xerox:
           <input
+            type="file"
             name="aadharXerox"
-            type="file"
-            accept=".pdf,.png,.jpg"
             onChange={handleChange}
-            className="mt-1 block w-full"
+            accept="application/pdf,image/*"
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Passport Photo</label>
+          <span className="text-sm text-gray-600">
+            {staff.aadharXerox ? staff.aadharXerox.name : 'No file selected'}
+          </span>
+        </label>
+
+        <label className="block mb-2">
+          Passport Photo:
           <input
+            type="file"
             name="passportPhoto"
-            type="file"
-            accept=".png,.jpg"
             onChange={handleChange}
-            className="mt-1 block w-full"
+            accept="image/*"
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Passbook</label>
+          <span className="text-sm text-gray-600">
+            {staff.passportPhoto ? staff.passportPhoto.name : 'No file selected'}
+          </span>
+        </label>
+
+        <label className="block mb-2">
+          Passbook:
           <input
-            name="passbook"
             type="file"
-            accept=".pdf,.png,.jpg"
+            name="passbook"
             onChange={handleChange}
-            className="mt-1 block w-full"
+            accept="application/pdf,image/*"
+            className="border p-2 rounded w-full"
           />
-        </div>
-        <div className="md:col-span-2 flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded w-full md:w-auto"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+          <span className="text-sm text-gray-600">
+            {staff.passbook ? staff.passbook.name : 'No file selected'}
+          </span>
+        </label>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Create Staff
+        </button>
+      </div>
+    </form>
   );
 };
 

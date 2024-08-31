@@ -7,13 +7,13 @@ import CertificateVerification from "./CertificateVerification";
 import StudentReportSheet from "./StudentReportSheet";
 import StaffPersonalDetails from "./StaffPersonalDetails";
 import StudentAttendance from "./StudentAttendance";
-import StaffWorksheet from "./StaffWorksheet";
-import StaffTaskSheet from "./StaffTaskSheet";
+import StaffReportSheet from "./StaffReportSheet"; // Renamed from StaffTaskSheet
 import Intern from "./Intern";
 import InternDetails from "./InternDetails";
 import ViewInterns from "./ViewInterns"; // Import the new component
 import Fees from "./Fees";
 import StudentDetails from "./StudentDetails";
+import ViewStaff from "./ViewStaff";
 import BarChart from "./BarChart";
 import Footer from "./Footer";
 import logo from './assets/logo.png';
@@ -92,12 +92,12 @@ const Dashboard = () => {
           {activeSection === "studentReportSheet" && <StudentReportSheet />}
           {activeSection === "studentAttendance" && <StudentAttendance />}
           {activeSection === "staffPersonalDetails" && <StaffPersonalDetails />}
-          {activeSection === "staffWorksheet" && <StaffWorksheet />}
-          {activeSection === "staffTaskSheet" && <StaffTaskSheet />}
+          {activeSection === "staffReportSheet" && <StaffReportSheet />} {/* Renamed from StaffTaskSheet */}
           {activeSection === "intern" && <Intern />}
           {activeSection === "internDetails" && <InternDetails />}
           {activeSection === "viewInterns" && <ViewInterns />} {/* Add this line */}
           {activeSection === "fees" && <Fees />}
+          {activeSection === "viewStaff" && <ViewStaff />}
         </main>
       </div>
       <Footer />

@@ -69,7 +69,7 @@ const Sidenavbar = ({ setActiveSection }) => {
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
                   Student Report Sheet
-                </button>
+                </Link>
               </li>
               <li className="mb-2">
                 <button
@@ -108,48 +108,22 @@ const Sidenavbar = ({ setActiveSection }) => {
                 </button>
               </li>
               <li className="mb-2">
-                <button
-                  onClick={() => handleClick("staffWorksheet")}
+                <Link
+                  to="#"
+                  onClick={() => handleClick("staffReportSheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  Staff Worksheet
+                  Staff Report Sheet
                 </button>
               </li>
               <li className="mb-2">
-                <button
-                  onClick={() => handleClick("staffTaskSheet")}
+                <Link
+                  to="#"
+                  onClick={() => handleClick("viewStaff")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  Staff Task Sheet
-                </button>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li className="mb-2">
-          <button
-            onClick={() => toggleDropdown("intern")}
-            className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
-          >
-            Intern
-          </button>
-          {showInternDropdown && (
-            <ul className="pl-4 mt-2">
-              <li className="mb-2">
-                <button
-                  onClick={() => handleClick("viewInterns")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  View Interns
-                </button>
-              </li>
-              <li className="mb-2">
-                <button
-                  onClick={() => handleClick("internDetails")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  Intern Details
-                </button>
+                  View Staff
+                </Link>
               </li>
             </ul>
           )}
