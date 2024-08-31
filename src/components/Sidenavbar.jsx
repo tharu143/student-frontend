@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Sidenavbar = ({ setActiveSection }) => {
   const [showStudentDropdown, setShowStudentDropdown] = useState(false);
   const [showStaffDropdown, setShowStaffDropdown] = useState(false);
-  const [showCourseDropdown, setShowCourseDropdown] = useState(false);
 
   const handleClick = (section) => {
     setActiveSection(section);
@@ -15,8 +14,6 @@ const Sidenavbar = ({ setActiveSection }) => {
       setShowStudentDropdown(!showStudentDropdown);
     } else if (dropdown === "staff") {
       setShowStaffDropdown(!showStaffDropdown);
-    } else if (dropdown === "course") {
-      setShowCourseDropdown(!showCourseDropdown);
     }
   };
 
@@ -41,7 +38,6 @@ const Sidenavbar = ({ setActiveSection }) => {
           </button>
           {showStudentDropdown && (
             <ul className="pl-4 mt-2">
-              {/* Existing student dropdown items */}
               <li className="mb-2">
                 <Link
                   to="#"
@@ -75,7 +71,7 @@ const Sidenavbar = ({ setActiveSection }) => {
                   onClick={() => handleClick("studentreportsheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  StudentReportSheet
+                  Student Report Sheet
                 </Link>
               </li>
               <li className="mb-2">
@@ -120,58 +116,19 @@ const Sidenavbar = ({ setActiveSection }) => {
               <li className="mb-2">
                 <Link
                   to="#"
-                  onClick={() => handleClick("staffWorksheet")}
+                  onClick={() => handleClick("staffReportSheet")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  Staff Worksheet
+                  Staff Report Sheet
                 </Link>
               </li>
               <li className="mb-2">
                 <Link
                   to="#"
-                  onClick={() => handleClick("staffTaskSheet")}
+                  onClick={() => handleClick("viewStaff")}
                   className="block py-3 px-4 hover:bg-gray-600 rounded"
                 >
-                  Staff Task Sheet
-                </Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li className="mb-2">
-          <button
-            onClick={() => toggleDropdown("course")}
-            className="block py-3 px-4 w-full text-left hover:bg-gray-700 rounded"
-          >
-            Course
-          </button>
-          {showCourseDropdown && (
-            <ul className="pl-4 mt-2">
-               <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AddCourse")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  AddCourse
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("ViewCourses")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  View Courses
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  to="#"
-                  onClick={() => handleClick("AssignCourse")}
-                  className="block py-3 px-4 hover:bg-gray-600 rounded"
-                >
-                  Assign Course to Student
+                  View Staff
                 </Link>
               </li>
             </ul>

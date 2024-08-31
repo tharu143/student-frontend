@@ -63,7 +63,7 @@ const PersonalDetails = () => {
         batch: "Morning",
         courseName: "",
         dateOfJoining: "",
-        mode: "Onlime",
+        mode: "Online",
         phoneNo: "",
         mailId: "",
         linkedinId: "",
